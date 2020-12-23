@@ -153,15 +153,15 @@ int main()
             break;
         case 3 :
            
-          int   arr_size = sizeof(array) / sizeof(array[0]);
+           
 
             printf("Given array is \n");
-            printArray(array, arr_size);
+            printArray(array, size);
 
-            mergeSort(array, 0, arr_size - 1);
+            mergeSort(array, 0, size - 1);
 
             printf("\nSorted array is \n");
-            printArray(array, arr_size);
+      
             
             break;
         case 4 :
