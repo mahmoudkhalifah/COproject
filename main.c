@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #define INT_MAX 2147483647
 
-// MERGE SORT FROM LINE *8* TO LINE *79*
-// QUICK SORT FROM LINE *83* TO LINE *113*
+// MERGE SORT FROM LINE 8 TO LINE 79
+// QUICK SORT FROM LINE 83 TO LINE 113
 
 //--START OF MERGE SORT FUNCTIONS--//
 
@@ -112,11 +112,45 @@ void quickSort(int arr[], int l, int h) {
 }
 //END OF QUICK SORT FUNCTIONS
 
+
+int binarySearch(int arr[], int size, int key){
+    int left = 0;
+    int right = size - 1;
+    while(left <= right)
+    {
+        int mid = (left + right) / 2;
+
+        if(arr[mid] == key)
+            return mid;
+
+        if(arr[mid] < key)
+            left = mid + 1;
+
+        else
+            right = mid - 1;
+    }
+
+    return -1;
+}
+
+int isArraySorted(int arr[], int size){
+    int a = 1, i = 0;
+    while((a == 1) && i < size - 1){
+        if(arr[i] > arr[i+1])
+            a = 0;
+        i++;
+    }
+    if(a == 1)
+        return 1;
+    else return 0;
+}
 void printArray(int arr[],int size) {
     for(int i=0;i<size;i++) {
         printf("%d ",arr[i]);
     }
 }
+
+
 
 
 int main()
@@ -125,8 +159,6 @@ int main()
     printf("enter the number of elements\n>>> ");
     scanf("%d",&size);
 
-    printf("\nenter the number of sort type\n1=> for Quick Sort\n2=> for Insertion Sort\n3=> for Merge Sort \n4=> for exit\n>>> ");
-    scanf("%d",&typeOfSort);
 
     if(typeOfSort == 1) {
         size++;
@@ -143,24 +175,50 @@ int main()
         scanf("%d",&array[i]);
     }
 
-    switch(typeOfSort) {
-        case 1 :
-            array[size] = INT_MAX;
-            quickSort(array,0,size);
-            break;
-        case 2 :
-            printf("Insertion Sort\n" );
-            break;
-        case 3 :
-            mergeSort(array, 0, size - 1);
-            break;
-        case 4 :
-            return 0;
-            break;
-        default :
-            printf("Invalid choice\n" );
+    printf("\nenter the number of sort type\n1=> for Quick Sort\n2=> for Insertion Sort\n3=> for Merge Sort \n4=> for Search(Binary Search)\n5=> for exit\n>>> ");
+    scanf("%d",&typeOfSort);
+
+
+
+    while(typeOfSort != 5) {
+        switch(typeOfSort) {
+            case 1 :
+                array[size] = INT_MAX;
+                quickSort(array,0,size);
+                break;
+            case 2 :
+                printf("Insertion Sort\n" );
+                break;
+            case 3 :
+                printf("Given array is \n");
+                printArray(array, size);
+                mergeSort(array, 0, size - 1);
+                printf("\nSorted array is \n");
+
+                break;
+            case 4:
+                if(isArraySorted(array, size)) {
+                    int key, searchItem;
+                    printf("Enter item to search for\n");
+                    scanf("%d", &key);
+                    searchItem = binarySearch(array, size, key);
+
+                    if(searchItem != -1)
+                        printf("Found in index: %d\n", searchItem);
+                    else printf("Not Found!");
+
+                } else printf("You Must Sort the list first and then search.");
+                break;
+            case 5:
+                return 0;
+                break;
+            default :
+                printf("Invalid choice\n" );
+        }
+        printArray(array,size);
+        printf("\nenter the number of sort type\n1=> for Quick Sort\n2=> for Insertion Sort\n3=> for Merge Sort \n4=> for Search(Binary Search)\n5=> for exit\n>>> ");
+        scanf("%d",&typeOfSort);
+
     }
-    printf("\nSorted array is \n");
-    printArray(array,size);
     return 0;
 }
