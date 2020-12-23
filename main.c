@@ -152,17 +152,7 @@ int main()
             printf("Insertion Sort\n" );
             break;
         case 3 :
-           
-           
-
-            printf("Given array is \n");
-            printArray(array, size);
-
             mergeSort(array, 0, size - 1);
-
-            printf("\nSorted array is \n");
-      
-            
             break;
         case 4 :
             return 0;
@@ -170,6 +160,7 @@ int main()
         default :
             printf("Invalid choice\n" );
     }
+    printf("\nSorted array is \n");
     printArray(array,size);
     return 0;
 }
