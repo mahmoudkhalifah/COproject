@@ -146,7 +146,7 @@ int isArraySorted(int arr[], int size){
 }
 void printArray(int arr[],int size) {
     for(int i=0;i<size;i++) {
-        printf("%d ",arr[i]);
+        printf("%c ",arr[i]);
     }
 }
 
@@ -169,10 +169,13 @@ int main()
     if(typeOfSort == 1) {
         size--;
     }
+    getc(stdin);
     printf("\nenter elements:\n");
     for(int i=0;i<size;i++) {
         printf(">>> ");
-        scanf("%d",&array[i]);
+        //scanf("%d",&array[i]);
+        array[i] = getc(stdin);
+        getc(stdin);
     }
 
     printf("\nenter the number of sort type\n1=> for Quick Sort\n2=> for Insertion Sort\n3=> for Merge Sort \n4=> for Search(Binary Search)\n5=> for exit\n>>> ");
@@ -200,23 +203,25 @@ int main()
                 if(isArraySorted(array, size)) {
                     int key, searchItem;
                     printf("Enter item to search for\n");
-                    scanf("%d", &key);
+                    getc(stdin);
+                    key = getc(stdin);
                     searchItem = binarySearch(array, size, key);
 
                     if(searchItem != -1)
                         printf("Found in index: %d\n", searchItem);
-                    else printf("Not Found!");
+                    else printf("Not Found!\n");
 
-                } else printf("You Must Sort the list first and then search.");
+                } else printf("You Must Sort the list first and then search.\n");
                 break;
             case 5:
                 return 0;
                 break;
-            default :
+            default:
                 printf("Invalid choice\n" );
         }
+        printf("Sorted array: ");
         printArray(array,size);
-        printf("\nenter the number of sort type\n1=> for Quick Sort\n2=> for Insertion Sort\n3=> for Merge Sort \n4=> for Search(Binary Search)\n5=> for exit\n>>> ");
+        printf("\n\nenter the number of sort type\n1=> for Quick Sort\n2=> for Insertion Sort\n3=> for Merge Sort \n4=> for Search(Binary Search)\n5=> for exit\n>>> ");
         scanf("%d",&typeOfSort);
 
     }
